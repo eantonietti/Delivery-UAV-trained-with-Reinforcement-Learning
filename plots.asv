@@ -1,0 +1,660 @@
+%% Plots.
+% In the following script the cumulative rewards (average and instataneous)
+% after training are extracted from the RLDesignerSession results.
+% For each training, the related options are specified.
+%%
+%% case 1:
+% env=discrete3DEnvClassrandomstart.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = false;
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=15000);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessRstartnew.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Random target','Random start','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-2.3,4]), xlim([0,15000])
+
+%% case 2:
+% env=discrete3DEnvClassrandomtarget.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = false;
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=15000);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessRtargetnew.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',1.5)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',1.5)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-2.3,4]), xlim([0,15000])
+
+%% case 1-2
+clear all
+load('RLDesignerSessRtargetnew.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.8500 0.3250 0.0980],'LineWidth',2)
+hold on
+
+load('RLDesignerSessRstartnew.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0 0.4470 0.7410],'LineWidth',2)
+
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Random target','Random start','fontsize', 18)
+set(gca,'FontSize',18)
+% ylim([-2.3,4]), xlim([0,15000])
+
+%% case 3:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = true;
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=15000);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessReference.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+figure()
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-3,4])
+
+%% case 4:
+% env=Discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = true;
+% 
+% trainingOptions:
+% MaxEpisodes=8000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=15000);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessR8000.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+figure()
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',1.5)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',1.5)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-3,4])
+
+%% case 5:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = true;
+% 
+% trainingOptions:
+% MaxEpisodes=10000; ...
+% MaxStepsPerEpisode=120; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=10000);
+% 
+% Rewardf = RewardFcn1.m
+
+clear all
+load('RLDesignerSessRR120RM.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+xlim([0,6800]), ylim([-2,2])
+%% case 6:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = true;
+% 
+% trainingOptions:
+% MaxEpisodes=10000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=10000);
+% 
+% Rewardf = RewardFcn(4).m
+
+clear all
+load('RLDesignerSessRR500RM(+4).mat') 
+
+episodeIndex = RLDesignerSession.Data.TrainResults(3).Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults(3).Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults(3).Data.AverageReward;
+
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+xlim([0,10000])
+
+%% case 7:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 256;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = true; (10^6)
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=15000);
+% 
+% Rewardf = RewardFcn1.m
+
+clear all
+load('RLDesignerSessBufferExperience.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-5,4]), xlim([0,15000])
+
+%% case 8:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = true;
+% 
+% trainingOptions:
+% MaxEpisodes=10000; ...
+% MaxStepsPerEpisode=120; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=maxEpisodes);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessReferenceBufferExperience.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+%ylim([-5,4]), xlim([0,15000])
+
+%% case 9:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-5;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = true;
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=15000);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessRR500e-5.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-5,4]), xlim([0,15000])
+
+%% case 10:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.4;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=15000);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessRR500_04.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+        figure()
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-5,4]), xlim([0,15000])
+
+%% case 12:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.2;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-3;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=maxEpisodes);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessRR500e-3.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+figure()
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-3,4])
+
+%% case 13:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.1;
+% MiniBatchSize = 128;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=maxEpisodes);
+% 
+% Rewardf = RewardFcn.m
+
+clear all
+load('RLDesignerSessRR500_0.1e-4.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+figure()
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+ylim([-3,4])
+
+%% case 13:
+% env=discrete3DEnvClass.m
+%
+% agentOptions: 
+% EpsilonGreedyExploration.EpsilonDecay = 1e-5;
+% EpsilonGreedyExploration.Epsilon = 0.1;
+% MiniBatchSize = 256;
+% CriticOptimizerOptions.LearnRate = 5e-4;
+% CriticOptimizerOptions.GradientThreshold = 1;
+% HRM = true (10^6)
+% 
+% trainingOptions:
+% MaxEpisodes=15000; ...
+% MaxStepsPerEpisode=500; ...
+% ScoreAveragingWindowLength=100;...
+% StopTrainingCriteria="EpisodeCount";...
+% StopTrainingValue=maxEpisodes);
+% 
+% Rewardf = RewardFcn1.m
+
+clear all
+load('RLDesignerSessReferenceBufferExperience40101.mat')
+
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+figure()
+plot(episodeIndex,episodeR,'-','Color',[0.3010 0.7450 0.9330],'LineWidth',2)
+hold on 
+plot(episodeIndex,averageR,'-b','LineWidth',2)
+xlabel('Episode','fontsize', 18)
+ylabel('Reward','fontsize', 18)
+legend('Episode R','Average R','fontsize', 18)
+set(gca,'FontSize',18)
+
+%% Plot together all the training with similar changes:
+%
+%% Effect of learnrate
+clear all
+
+figure()
+load('RLDesignerSessRR500e-5.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.4660 0.6740 0.1880],'LineWidth',1.5)
+hold on
+
+load('RLDesignerSessReference.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.8500 0.3250 0.0980],'LineWidth',1.5)
+hold on
+
+load('RLDesignerSessRR500e-3.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0 0.4470 0.7410],'LineWidth',1.5)
+
+xlabel('Episode','fontsize', 18)
+ylabel('Average Reward','fontsize', 18)
+legend('lrate=5e-5','lrate=5e-4','lrate=5e-3','fontsize', 18)
+set(gca,'FontSize',18)
+
+%% Effect of epsilon
+clear all
+
+figure()
+load('RLDesignerSessRR500_01e-3.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.4660 0.6740 0.1880],'LineWidth',1.5)
+hold on
+
+load('RLDesignerSessReference.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.8500 0.3250 0.0980],'LineWidth',1.5)
+hold on
+
+load('RLDesignerSessRR500_04.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0 0.4470 0.7410],'LineWidth',1.5)
+
+xlabel('Episode','fontsize', 18)
+ylabel('Average Reward','fontsize', 18)
+legend('\epsilon=0.1, lrate=5e-3','\epsilon=0.2, lrate=5e-4','\epsilon=0.4, lrate=5e-4','fontsize', 18)
+set(gca,'FontSize',18)
+
+%% Effect of BufferExperience
+clear all
+
+figure()
+load('RLDesignerSessReference.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.8500 0.3250 0.0980],'LineWidth',1.5)
+hold on
+load('RLDesignerSessReferenceBufferExperience.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0 0.4470 0.7410],'LineWidth',1.5)
+hold on
+load('RLDesignerSessReferenceBufferExperience4.01.01.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.4660 0.6740 0.1880],'LineWidth',1.5)
+hold on
+% load('RLDesignerSessRR500_04.mat')
+% episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+% episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+% averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+% plot(episodeIndex,averageR,'Color',[0 0.4470 0.7410],'LineWidth',1.5)
+
+xlabel('Episode','fontsize', 18)
+ylabel('Average Reward','fontsize', 18)
+legend('mini-batch=128, buffer=1e5','mini-batch=256, buffer=1e6','mini-batch=256, buffer=1e6, var. R','fontsize', 18)
+set(gca,'FontSize',18)
+
+ %% Effect of reward
+clear all
+
+figure()
+
+load('RLDesignerSessReference.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.8500 0.3250 0.0980],'LineWidth',1.5)
+hold on
+
+load('RLDesignerSessRR500_4.01.01.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults(2).Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults(2).Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults(2).Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0.4660 0.6740 0.1880],'LineWidth',1.5)
+hold on
+
+load('RLDesignerSessReferenceBufferExperience4.01.01.mat')
+episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+plot(episodeIndex,averageR,'Color',[0 0.4470 0.7410],'LineWidth',1.5)
+hold on
+
+%% 
+% 
+% 
+% load('RLDesignerSessReferenceBufferExperience.mat')
+% episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+% episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+% averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+% plot(episodeIndex,averageR,'-.','Color',[0 0.4470 0.7410],'LineWidth',1.5)
+% hold on
+% 
+% 
+% 
+% xlabel('Episode','fontsize', 18)
+% ylabel('Average Reward','fontsize', 18)
+% legend('Reference','Var1','Var2','fontsize', 18)
+% set(gca,'FontSize',18)
+% 
+% load('RLDesignerSessRR500_01e-3.mat')
+% episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+% episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+% averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+% plot(episodeIndex,averageR,'Color',[0.4660 0.6740 0.1880],'LineWidth',1.5)
+% hold on
+% 
+% 
+% load('RLDesignerSessRR500_04.mat')
+% episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+% episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+% averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+% plot(episodeIndex,averageR,'..','Color',[0 0.4470 0.7410],'LineWidth',1.5)
+% hold on
+% 
+% load('RLDesignerSessRR500e-5.mat')
+% episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+% episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+% averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+% plot(episodeIndex,averageR,'..','Color',[0.4660 0.6740 0.1880],'LineWidth',1.5)
+% hold on
+% 
+% load('RLDesignerSessRR500e-3.mat')
+% episodeIndex = RLDesignerSession.Data.TrainResults.Data.EpisodeIndex;
+% episodeR = RLDesignerSession.Data.TrainResults.Data.EpisodeReward;
+% averageR = RLDesignerSession.Data.TrainResults.Data.AverageReward;
+% plot(episodeIndex,averageR,'..','Color',[0 0.4470 0.7410],'LineWidth',1.5)
+% 
+% xlabel('Episode','fontsize', 18)
+% ylabel('Average Reward','fontsize', 18)
+% legend('Reference',,'fontsize', 18)
+% set(gca,'FontSize',18)
+
